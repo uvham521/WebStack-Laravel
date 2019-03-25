@@ -6,10 +6,10 @@ services:
     restart: always
     container_name: "mysql_wsl"
     environment:
-      MYSQL_ROOT_PASSWORD: yourpass
+      MYSQL_ROOT_PASSWORD: Tym8zrnNRpz4
       MYSQL_DATABASE: webstack
       MYSQL_USER: webstack
-      MYSQL_PASSWORD: yourpass
+      MYSQL_PASSWORD: Xym8zrnNRpz
     command: --default-authentication-plugin=mysql_native_password
     networks:
       - "webstacknet"
@@ -33,7 +33,7 @@ services:
       DB_PORT: 3306
       DB_DATABASE: webstack
       DB_USERNAME: webstack
-      DB_PASSWORD: yourpass
+      DB_PASSWORD: Xym8zrnNRpz
     command: ['/entrypoint.sh','new-server']
     networks:
       - "webstacknet"

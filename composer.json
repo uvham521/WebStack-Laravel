@@ -1,40 +1,39 @@
 {
     "name": "laravel/laravel",
+    "type": "project",
     "description": "The Laravel Framework.",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
-    "type": "project",
     "require": {
-        "php": ">=7.0.0",
-        "caouecs/laravel-lang": "~3.0",
-        "encore/laravel-admin": "^1.6",
-        "fideloper/proxy": "~3.3",
-        "intervention/image": "^2.4",
-        "james.xue/login-captcha": "^1.1",
-        "jxlwqq/material-ui": "^1.0",
-        "laravel-admin-ext/config": "^1.0",
-        "laravel-admin-ext/grid-lightbox": "^1.0",
-        "laravel/framework": "5.5.*",
-        "laravel/tinker": "~1.0",
-        "lasserafn/php-initial-avatar-generator": "^4.0",
-        "overtrue/pinyin": "~4.0"
+        "php": "^7.3|^8.0",
+        "dcat/laravel-admin": "2.*",
+        "fideloper/proxy": "^4.4",
+        "fruitcake/laravel-cors": "^2.0",
+        "ghost/dcat-config": "^1.0",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "intervention/image": "^2.5",
+        "lake/login-captcha": "^1.0",
+        "laravel/framework": "^8.12",
+        "laravel/tinker": "^2.5",
+        "lasserafn/php-initial-avatar-generator": "^4.2",
+        "overtrue/pinyin": "^4.0"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.2",
-        "filp/whoops": "~2.0",
-        "fzaninotto/faker": "~1.4",
-        "mockery/mockery": "~1.0",
-        "orangehill/iseed": "^2.6",
-        "phpunit/phpunit": "~6.0",
-        "symfony/thanks": "^1.0"
+        "barryvdh/laravel-debugbar": "^3.5",
+        "barryvdh/laravel-ide-helper": "^2.10",
+        "facade/ignition": "^2.5",
+        "fakerphp/faker": "^1.9.1",
+        "laravel/sail": "^1.0.1",
+        "laravel/ui": "^3.2",
+        "mockery/mockery": "^1.4.2",
+        "nunomaduro/collision": "^5.0",
+        "phpunit/phpunit": "^9.3.3"
     },
     "autoload": {
-        "classmap": [
-            "database/seeds",
-            "database/factories"
-        ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
         }
     },
     "autoload-dev": {
@@ -42,27 +41,28 @@
             "Tests\\": "tests/"
         }
     },
-    "extra": {
-        "laravel": {
-            "dont-discover": [
-            ]
-        }
-    },
     "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
-            "@php artisan key:generate"
-        ],
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover"
+            "@php artisan key:generate --ansi"
         ]
     },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
     "config": {
+        "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true,
-        "optimize-autoloader": true
-    }
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

@@ -2,102 +2,37 @@
 
 namespace App\Admin\Controllers;
 
-use App\Site;
-use App\Category;
-use App\Http\Controllers\Controller;
-use Encore\Admin\Controllers\HasResourceActions;
-use Encore\Admin\Form;
-use Encore\Admin\Grid;
-use Encore\Admin\Layout\Content;
-use Encore\Admin\Show;
+use App\Models\Site;
+use App\Models\Category;
+use Dcat\Admin\Form;
+use Dcat\Admin\Grid;
+use Dcat\Admin\Show;
+use Dcat\Admin\Http\Controllers\AdminController;
 
-class SiteController extends Controller
+class SiteController extends AdminController
 {
-    use HasResourceActions;
-
-    /**
-     * Index interface.
-     *
-     * @param Content $content
-     * @return Content
-     */
-    public function index(Content $content)
+    protected function title()
     {
-        return $content
-            ->header('网站管理')
-            ->body($this->grid());
+        return '网站管理';
     }
 
-    /**
-     * Show interface.
-     *
-     * @param mixed $id
-     * @param Content $content
-     * @return Content
-     */
-    public function show($id, Content $content)
-    {
-        return $content
-            ->header('Detail')
-            ->description('description')
-            ->body($this->detail($id));
-    }
-
-    /**
-     * Edit interface.
-     *
-     * @param mixed $id
-     * @param Content $content
-     * @return Content
-     */
-    public function edit($id, Content $content)
-    {
-        return $content
-            ->header('编辑网站')
-            ->body($this->form()->edit($id));
-    }
-
-    /**
-     * Create interface.
-     *
-     * @param Content $content
-     * @return Content
-     */
-    public function create(Content $content)
-    {
-        return $content
-            ->header('新增网站')
-            ->body($this->form());
-    }
-
-    /**
-     * Make a grid builder.
-     *
-     * @return Grid
-     */
     protected function grid()
     {
-        $grid = new Grid(new Site);
+        return Grid::make(Site::with(['category']), function (Grid $grid) {
 
-        $grid->id('ID');
-        $grid->category()->title('分类');
-        $grid->title('标题');
-        $grid->thumb('图标')->gallery(['width' => 25, 'height' => 25]);
-        $grid->describe('描述')->limit(40);
-        $grid->url('地址');
+            $grid->column('id', 'ID');
+            $grid->column('category.title', '分类');
+            $grid->column('title', '标题');
+            $grid->column('thumb', '图标')->image('/uploads', 40, 40);
+            $grid->column('describe', '描述')->limit(40);
+            $grid->column('url', '地址')->link();
 
-        $grid->filter(function ($filter) {
-            $filter->disableIdFilter();
-
-            $categories = Category::query()->pluck('title', 'id');
-            $filter->equal('category_id', '分类')->select($categories);
-
-            $filter->like('title', '标题');
+            $grid->filter(function (Grid\Filter $filter) {
+                $categories = Category::all()->pluck('title', 'id');
+                $filter->equal('category_id', '分类')->select($categories);
+                $filter->like('title', '标题');
+            });
         });
-
-        $grid->disableExport();
-
-        return $grid;
     }
 
     /**
@@ -108,18 +43,16 @@ class SiteController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(Site::findOrFail($id));
-
-        $show->id('ID');
-        $show->category_id('分类');
-        $show->title('标题');
-        $show->thumb('图标');
-        $show->describe('Describe');
-        $show->url('Url');
-        $show->created_at('Created at');
-        $show->updated_at('Updated at');
-
-        return $show;
+        return Show::make($id, Site::with(['category']), function (Show $show) {
+            $show->field('id', 'ID');
+            $show->field('category.title', '分类');
+            $show->field('title', '标题');
+            $show->field('thumb', '图标')->image('/uploads', 80, 80);
+            $show->field('describe', '描述');
+            $show->field('url', '地址')->link();
+            $show->field('created_at', '创建时间');
+            $show->field('updated_at', '更新时间');
+        });
     }
 
     /**

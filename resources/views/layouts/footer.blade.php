@@ -13,7 +13,7 @@
             <a href="https://github.com/hui-ho" target="_blank">
                 <strong>hui-ho</strong>
             </a>
-            <span>{{ config('icp_record') }}</span>
+            <span>{{ config('base.icp_record') }}</span>
             <!--  - Purchase for only <strong>23$</strong> -->
         </div>
         <!-- Go to Top Link, just add rel="go-top" to any link to add this functionality -->

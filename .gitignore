@@ -13,4 +13,4 @@ npm-debug.log
 yarn-error.log
 _ide_helper.php
 dcat_admin_ide_helper.php
-.idea
+/.idea

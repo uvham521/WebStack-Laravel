@@ -1,16 +1,23 @@
 <?php
 
+use Dcat\Admin\Admin;
+use Dcat\Admin\Grid;
+use Dcat\Admin\Form;
+use Dcat\Admin\Grid\Filter;
+use Dcat\Admin\Show;
+
 /**
- * Laravel-admin - admin builder based on Laravel.
- * @author z-song <https://github.com/z-song>
+ * Dcat-admin - admin builder based on Laravel.
+ * @author jqh <https://github.com/jqhph>
  *
  * Bootstraper for Admin.
  *
  * Here you can remove builtin form field:
- * Encore\Admin\Form::forget(['map', 'editor']);
  *
- * Or extend custom form field:
- * Encore\Admin\Form::extend('php', PHPEditor::class);
+ * extend custom field:
+ * Dcat\Admin\Form::extend('php', PHPEditor::class);
+ * Dcat\Admin\Grid\Column::extend('php', PHPEditor::class);
+ * Dcat\Admin\Grid\Filter::extend('php', PHPEditor::class);
  *
  * Or require js and css assets:
  * Admin::css('/packages/prettydocs/css/styles.css');
@@ -18,4 +25,7 @@
  *
  */
 
-Encore\Admin\Form::forget(['map', 'editor']);
+Grid::resolving(function (Grid $grid) {
+    $grid->setActionClass(Grid\Displayers\Actions::class);
+    $grid->tableCollapse(false);
+});

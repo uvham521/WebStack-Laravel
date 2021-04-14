@@ -11,7 +11,7 @@
 克隆代码：
 
 ```shell
-git clone https://github.com/hui-ho/WebStack-Laravel.git
+git clone https://github.com/TyrantG/WebStack-Laravel.git
 ```
 
 安装依赖：

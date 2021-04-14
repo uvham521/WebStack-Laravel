@@ -1,4 +1,4 @@
-let mix = require('laravel-mix');
+const mix = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
@@ -12,28 +12,28 @@ let mix = require('laravel-mix');
  */
 
 mix.styles([
-    'resources/assets/web-stack/css/fonts/linecons/css/linecons.css',
-    'resources/assets/web-stack/css/fonts/fontawesome/css/font-awesome.min.css',
-    'resources/assets/web-stack/css/bootstrap.css',
-    'resources/assets/web-stack/css/xenon-core.css',
-    'resources/assets/web-stack/css/xenon-components.css',
-    'resources/assets/web-stack/css/xenon-skins.css',
-    'resources/assets/web-stack/css/nav.css'
+    'resources/web-stack/css/fonts/linecons/css/linecons.css',
+    'resources/web-stack/css/fonts/fontawesome/css/font-awesome.min.css',
+    'resources/web-stack/css/bootstrap.css',
+    'resources/web-stack/css/xenon-core.css',
+    'resources/web-stack/css/xenon-components.css',
+    'resources/web-stack/css/xenon-skins.css',
+    'resources/web-stack/css/nav.css'
 ], 'public/css/app.css');
 
-mix.copyDirectory('resources/assets/web-stack/css/fonts/fontawesome/fonts', 'public/fonts');
-mix.copyDirectory('resources/assets/web-stack/css/fonts/linecons/font', 'public/font');
-mix.copyDirectory('resources/assets/web-stack/images', 'public/img');
+mix.copyDirectory('resources/web-stack/css/fonts/fontawesome/fonts', 'public/fonts');
+mix.copyDirectory('resources/web-stack/css/fonts/linecons/font', 'public/font');
+mix.copyDirectory('resources/web-stack/images', 'public/img');
 
 mix.scripts([
-    'resources/assets/web-stack/js/jquery-1.11.1.min.js',
-    'resources/assets/web-stack/js/bootstrap.min.js',
-    'resources/assets/web-stack/js/TweenMax.min.js',
-    'resources/assets/web-stack/js/resizeable.js',
-    'resources/assets/web-stack/js/joinable.js',
-    'resources/assets/web-stack/js/xenon-api.js',
-    'resources/assets/web-stack/js/xenon-toggles.js',
-    'resources/assets/web-stack/js/xenon-custom.js',
+    'resources/web-stack/js/jquery-1.11.1.min.js',
+    'resources/web-stack/js/bootstrap.min.js',
+    'resources/web-stack/js/TweenMax.min.js',
+    'resources/web-stack/js/resizeable.js',
+    'resources/web-stack/js/joinable.js',
+    'resources/web-stack/js/xenon-api.js',
+    'resources/web-stack/js/xenon-toggles.js',
+    'resources/web-stack/js/xenon-custom.js',
 ], 'public/js/app.js');
 
 mix.version();

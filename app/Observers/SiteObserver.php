@@ -4,7 +4,7 @@
 namespace App\Observers;
 
 
-use App\Site;
+use App\Models\Site;
 use Overtrue\Pinyin\Pinyin;
 use LasseRafn\InitialAvatarGenerator\InitialAvatar;
 

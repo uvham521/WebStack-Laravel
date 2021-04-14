@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Database\QueryException;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\DB;
 
@@ -36,19 +37,18 @@ class ProjectCleanCommand extends Command
      * Execute the console command.
      *
      * @return mixed
+     * @throws \Throwable
      */
     public function handle()
     {
         // 确认操作
         $this->checkHint();
 
-        DB::transaction(function (){
-            DB::table('sites')->truncate();
-            DB::table('categories')->truncate();
+        DB::table('sites')->truncate();
+        DB::table('categories')->truncate();
 
-            $filesystem = new Filesystem;
-            $filesystem->cleanDirectory(public_path('uploads/images'));
-        });
+        $filesystem = new Filesystem;
+        $filesystem->cleanDirectory(public_path('uploads/images'));
 
         $this->info('完成.');
     }
